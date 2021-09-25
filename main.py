@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from factory import process
+from tkinter import ttk
 
 class mainWindow:
 
@@ -10,10 +11,16 @@ class mainWindow:
     def wns():
         window = Tk()
         window.title("Proyecto 2")
-        window.geometry("800x500")
+        window.geometry("1000x500")
         window.resizable(0,0)
 
-        archivo = Button(window, text="Archivo", command = lambda: mainWindow.selectFile(window))
+        tabla = ttk.Treeview(window, columns = ('#1', '#2', '#3'))
+        tabla['show'] = 'headings'
+        tabla.heading("#1", text = "tiempo")
+        tabla.heading("#2", text = "Linea 1")
+        tabla.heading("#3", text = "Linea 2")
+
+        archivo = Button(window, text="Archivo", command = lambda: mainWindow.selectFile(window, tabla))
         reportes = Button(window, text="Reportes")
         ayuda = Button(window, text="Ayuda", command = lambda: mainWindow.showInfo())
         accion = Button(window, text="SmartWatch")
@@ -28,16 +35,19 @@ class mainWindow:
 
         lbl1.place(x = 105, y = 160)
         lbl2.place(x = 105, y = 180, width = "150", height = "200")
+
+        tabla.place(x = 285, y = 160)
+
         window.mainloop()
 
-    def selectFile(w):
-        w.destroy()
+    def selectFile(w, tabla):
+        #w.destroy()
         window = Tk()
         window.title("Subir xml")
         window.geometry("400x200")
         window.resizable(0,0)
 
-        archivo = Button(window, text="Cargar Maquina", command = lambda : process.readMachine())
+        archivo = Button(window, text="Cargar Maquina", command = lambda : process.readMachine(tabla))
         reportes = Button(window, text="Cargar simulacion", command = lambda : process.readSimulation())
         salir = Button(window, text="Salir", command = lambda : mainWindow.backMain(window))
         

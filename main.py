@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from factory import process
 from tkinter import ttk
+window = Tk()
 
 class mainWindow:
 
@@ -9,7 +10,6 @@ class mainWindow:
         messagebox.showinfo("Informacion", "Introduccion a la computacion y programacion 2 \nNombre: Kevyn Josué Girón Jiménez \nCarnet: 201700653 \nSeccion C")
 
     def wns():
-        window = Tk()
         window.title("Proyecto 2")
         window.geometry("1000x500")
         window.resizable(0,0)
@@ -42,18 +42,18 @@ class mainWindow:
 
     def selectFile(w, tabla):
         #w.destroy()
-        window = Tk()
-        window.title("Subir xml")
-        window.geometry("400x200")
-        window.resizable(0,0)
+        win = Tk()
+        win.title("Subir xml")
+        win.geometry("400x200")
+        win.resizable(0,0)
 
-        archivo = Button(window, text="Cargar Maquina", command = lambda : process.readMachine(tabla))
-        reportes = Button(window, text="Cargar simulacion", command = lambda : process.readSimulation())
-        salir = Button(window, text="Salir", command = lambda : mainWindow.backMain(window))
+        archivo = Button(win, text="Cargar Maquina", command = lambda : process.readMachine(tabla))
+        reportes = Button(win, text="Cargar simulacion", command = lambda : process.readSimulation())
+        salir = Button(win, text="Salir", command = lambda : win.destroy())
         
-        lbl1 = Label(window, text = " ")
-        lbl2 = Label(window, text = " ")
-        lbl3 = Label(window, text = " ")
+        lbl1 = Label(win, text = " ")
+        lbl2 = Label(win, text = " ")
+        lbl3 = Label(win, text = " ")
         
         lbl1.pack()
         archivo.pack()
@@ -63,9 +63,5 @@ class mainWindow:
         salir.pack()
 
         window.mainloop()
-
-    def backMain(w):
-        w.destroy()
-        mainWindow.wns()
 
 mainWindow.wns()
